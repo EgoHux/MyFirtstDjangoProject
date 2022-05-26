@@ -22,12 +22,13 @@ from mainapp import views as mainapp
 
 
 
-urlpatterns = [
 
+urlpatterns = [
+    path('admin/', admin.site.urls),
     path("", mainapp.index),
     path("products/", mainapp.products),
     path("contact/", mainapp.contact),
-    path('admin/', admin.site.urls),
+
 
 
 ]
