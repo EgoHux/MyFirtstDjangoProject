@@ -18,6 +18,7 @@ from django.urls import path
 # from MyShop.mainapp import
 # import mainapp.views as mainapp
 from mainapp import views as mainapp
+# from MyShop.mainapp import views as mainapp
 
 
 
@@ -25,9 +26,9 @@ from mainapp import views as mainapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", mainapp.index),
-    path("products/", mainapp.products),
-    path("contact/", mainapp.contact),
+    path("", mainapp.index, name="main"),
+    path("products/", mainapp.products, name='products'),
+    path("contact/", mainapp.contact, name = 'contact'),
 
 
 
