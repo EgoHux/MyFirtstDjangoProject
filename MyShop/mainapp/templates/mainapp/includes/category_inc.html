@@ -1,0 +1,9 @@
+<div class="links clearfix">
+				<ul class="links-menu">
+					<li><a href="{% url 'products' %}" class="{% if request.resolver_match.url_name == 'products' %} active {% endif %}">все</a></li>
+					{% for category in categories %}
+					<li><a href="{% url 'category' category.id %}" class = "{% if request.resolver_match.url_name == 'category' and request.resolver_match.kwargs.pk == category.id %} active {% endif %}">{{category.name}}</a></li>
+
+					{% endfor %}
+				</ul>
+			</div>

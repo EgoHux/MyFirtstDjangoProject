@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
 # Create your views here.
@@ -15,6 +15,18 @@ def products(request):
         'title': "Продукты",
         'products': products,
         'categories': categories
+    })
+
+
+def category(request, pk):
+    categories = Category.objects.all()
+    category = get_object_or_404(Category, id=pk)
+    products = Product.objects.filter(category=category)
+    return render(request, 'mainapp/products.html', context={
+        'title': "Продукты",
+        'products': products,
+        'categories': categories,
+        "category": category
     })
 
 def contact(request):

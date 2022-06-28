@@ -1,0 +1,11 @@
+{% extends 'authapp/base.html' %}
+
+{% block content %}
+<a href = "{% url 'main' %} " class = 'pure-button'>Назад</a>
+<div class = "pure-form">
+<h2>Ваши товары: </h2>
+{% for item in basket%}
+    <p>{{item}} <a href ="{% url 'basket:delete' item.id %}" class = 'button-error pure-button'>Удалить</a></p>
+{% endfor %}
+    </div>
+{% endblock %}
