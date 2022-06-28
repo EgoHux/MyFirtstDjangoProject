@@ -7,6 +7,7 @@
 					<li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %} active {% endif %}">контакты</a></li>
 					{% if request.user.is_authenticated %}
 					<li><a href = "{% url 'auth:edit'%}">{{user.username}}</a></li>
+					<li><a href = "{% url 'basket:view'%}">Корзина ({{request.user.basket.sum}})</a></li>
 					<li><a href = "{% url 'auth:logout'%}"> Выйти</a></li>
 					{% else %}
 					<li><a href = "{% url 'auth:login' %}">Войти </a></li>

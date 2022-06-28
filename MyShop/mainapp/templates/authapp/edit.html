@@ -2,11 +2,11 @@
 
 
 {% block content %}
-<form class="form-horizontal" action="{% url 'auth:edit' %}" method="post">
+<form class="pure-form" action="{% url 'auth:edit' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
 
 <br>
-    <input class="form-control" type="submit" value="Изменить">
+    <input class="pure-button pure-button-primary" type="submit" value="Изменить">
 </form>
 {% endblock %}

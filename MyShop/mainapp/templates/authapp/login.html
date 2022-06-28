@@ -2,11 +2,11 @@
 
 
 {% block content %}
-<form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+<form class="pure-form" action="{% url 'auth:login' %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
 
 <br>
-    <input class="form-control" type="submit" value="войти">
+    <input class="pure-button pure-button-primary" type="submit" value="войти">
 </form>
 {% endblock %}
