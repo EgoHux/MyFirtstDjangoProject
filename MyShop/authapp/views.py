@@ -3,6 +3,7 @@ from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import auth
 from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -19,7 +20,8 @@ def login(request):
             )
             if user:
                 auth.login(request, user=user)
-                return HttpResponseRedirect(reverse('main'))
+                reverse_url = request.GET.get('next', reverse('main'))
+                return HttpResponseRedirect(reverse_url)
 
     return render(request, 'authapp/login.html', context={
             'title': "Вход в систему",
@@ -41,7 +43,7 @@ def register(request):
             'form': form
     })
 
-
+@login_required
 def edit(request):
     form = ShopUserEditForm(instance=request.user)
     if request.method == 'POST':
