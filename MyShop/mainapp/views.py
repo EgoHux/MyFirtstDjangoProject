@@ -1,5 +1,7 @@
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 import random
-
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
@@ -10,11 +12,12 @@ def index(request):
         'title': "Главная"
     })
 
-def products(request):
+def products(request, page=1):
     products = Product.objects.all()
     categories = Category.objects.all()
     hot_product = random.choice(products)
     products = products.exclude(pk=hot_product.pk)
+ 
     return render(request, 'mainapp/products.html', context={
         'title': "Продукты",
         'products': products,
@@ -33,13 +36,18 @@ def product(request, pk):
 
     })
 
-def category(request, pk):
+def category(request, pk, page=1):
     categories = Category.objects.all()
     category = get_object_or_404(Category, id=pk)
     products = Product.objects.filter(category=category)
+    paginator = Paginator(products, per_page=3)
+
+    if page > paginator.num_pages:
+        return HttpResponseRedirect(reverse('category', args=[category.id])) 
+
     return render(request, 'mainapp/category.html', context={
         'title': "Продукты",
-        'products': products,
+        'products': paginator.page(page),
         'categories': categories,
         "category": category
     })

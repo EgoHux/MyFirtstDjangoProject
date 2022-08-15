@@ -1,0 +1,46 @@
+{% extends 'adminapp/base.html'%} {%load static%} {% block content%}
+<h2>{{title}}</h2>
+
+
+<div class="pure-form">
+    <a href="{% url 'adminka:create_user'%}" class="pure-button">Создать Пользователя</a>
+    <hr>
+
+    {% if page_obj.has_next%}
+					<a class="pure-button pure-button-primary" href="{% url 'adminka:view_users' page_obj.next_page_number %}">Cледующая страница</a>
+					{% endif %}
+
+					{% if page_obj.has_previous %}
+					<a class="pure-button pure-button-primary" href="{% url 'adminka:view_users' page_obj.previous_page_number %}">Предыдущая страница</a>
+					{% endif %}
+  {% for user in object_list %}
+  <table class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>username</th>
+        <th>last_login</th>
+        <th>is_active</th>
+        <th>is_superuser</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="{% if not user.is_active %} inactive {%endif%}" >
+        <td>{{user.username}}</td>
+        <td>{{user.last_login}}</td>
+        <td>{{user.is_active}}</td>
+        <td>{{user.is_superuser}}</td>
+        <td><a href="{% url 'adminka:update_user' user.pk %}" class="pure-button">Изменить</a></td>
+        <td>
+          <a
+            href="{% url 'adminka:delete_user' user.pk %}"
+            class="button-error pure-button"
+            >Удалить</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%endfor%} {%endblock%}
