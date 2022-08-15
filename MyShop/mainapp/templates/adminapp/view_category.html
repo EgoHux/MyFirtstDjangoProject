@@ -1,0 +1,39 @@
+{% extends 'adminapp/base.html'%} {%load static%} {% block content%}
+<h2>{{title}}</h2>
+<div class="pure-form">
+    <a href="{% url 'adminka:create_category'%}" class="pure-button">Создать Категорию</a>
+    <a href="{% url 'adminka:create_product' %}" class="pure-button">Создать Продукт</a>
+    <hr>
+  {% for category in object_list %}
+  <table class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>description</th>
+        <th>is_active</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="{% if not category.is_active %} inactive {%endif%}" >
+        <td>{{category.name}}</td>
+        <td>{{category.description}}</td>
+        <td>{{category.is_active}}</td>
+        <td><a href="{% url 'adminka:view_products' category.pk %}" class="pure-button"
+          >К продуктам</a
+        ></td>
+        <td><a href="{% url 'adminka:update_category' category.pk %}" class="pure-button">Изменить</a></td>
+        <td>
+          <a
+            href="{% url 'adminka:delete_category' category.pk %}"
+            class="button-error pure-button"
+            >Удалить</a
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%endfor%} {%endblock%}

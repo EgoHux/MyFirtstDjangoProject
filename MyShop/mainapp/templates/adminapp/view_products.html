@@ -1,0 +1,33 @@
+{% extends 'adminapp/base.html'%} {%load static%} {% block content%}
+<h2>{{title}}</h2>
+<div class="pure-form">
+    <hr>
+  {% for product in products %}
+  <table class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>description</th>
+        <th>is_active</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="{% if not product.is_active %} inactive {%endif%}" >
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.is_active}}</td>
+        <td><a href="{% url 'adminka:update_product' product.pk %}" class="pure-button">Изменить</a></td>
+        <td>
+          <a
+            href="{% url 'adminka:delete_product' product.pk %}"
+            class="button-error pure-button"
+            >Удалить</a
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{%endfor%} {%endblock%}

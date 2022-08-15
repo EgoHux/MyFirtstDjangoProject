@@ -1,0 +1,12 @@
+{% extends 'adminapp/base.html'%} {%load static%} {% block content%}
+<h2>Редактирование продукта</h2>
+<form
+  action="{% url 'adminka:update_product' product.pk %}"
+  enctype="multipart/form-data"
+  method="post"
+  class="pure-form"
+>
+  {{form.as_p}} {% csrf_token %}
+  <input type="submit" class="pure-button" value="Изменить" />
+</form>
+{% endblock %}

@@ -17,7 +17,7 @@ class ShopUserRegisterForm(UserCreationForm):
 class ShopUserEditForm(UserChangeForm):
     class Meta:
         model = ShopUser
-        fields = ("username", 'first_name', 'last_name', 'email', "avatar", 'age')
+        fields = ("username", 'first_name', 'last_name', 'email', "avatar", 'age', 'is_active')
 
     def clean_age(self):
         data = self.cleaned_data['age']
